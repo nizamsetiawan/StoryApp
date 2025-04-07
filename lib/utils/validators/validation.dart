@@ -2,7 +2,7 @@
 class TValidator {
 
   /// empty text validation
-  static String? validateEmptyText(String? fieldName, String? value) {
+  static String? validateEmptyText( String? value) {
     if (value == null || value.isEmpty) {
       return 'Nama wajib diisi';
     }
@@ -28,8 +28,8 @@ class TValidator {
     }
 
     //check for minimum password length
-    if(value.length < 6) {
-      return 'Kata sandi minimal 6 karakter';
+    if(value.length < 8) {
+      return 'Kata sandi minimal 8 karakter';
     }
 
     return null;

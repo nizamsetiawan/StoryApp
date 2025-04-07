@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:agroai/common/widgets/custom_shapes/curved_edges/curved_edges.dart';
+import 'package:storyapp/common/widgets/custom_shapes/curved_edges/curved_edges.dart';
 
 class TCurvedEdgeWidget extends StatelessWidget {
   const TCurvedEdgeWidget({

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:agroai/utils/constraints/colors.dart';
-import 'package:agroai/utils/helpers/helper_functions.dart';
+import 'package:storyapp/utils/constraints/colors.dart';
+import 'package:storyapp/utils/helpers/helper_functions.dart';
 
 class TFormDivider extends StatelessWidget {
   const TFormDivider({

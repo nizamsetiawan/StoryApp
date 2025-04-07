@@ -1,9 +1,9 @@
-import 'package:agroai/utils/logging/logger.dart';
+import 'package:storyapp/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:agroai/common/widgets/loaders/animation_loader.dart';
-import 'package:agroai/utils/constraints/colors.dart';
-import 'package:agroai/utils/helpers/helper_functions.dart';
+import 'package:storyapp/common/widgets/loaders/animation_loader.dart';
+import 'package:storyapp/utils/constraints/colors.dart';
+import 'package:storyapp/utils/helpers/helper_functions.dart';
 
 ///a utility class for managing full screen loading dialog
 

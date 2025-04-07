@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:agroai/utils/constraints/sizes.dart';
+import 'package:storyapp/utils/constraints/sizes.dart';
 
 class TSpacingStyle {
   static const EdgeInsetsGeometry paddingWithAppBarHeight = EdgeInsets.only(

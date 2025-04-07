@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:agroai/utils/constraints/colors.dart';
-import 'package:agroai/utils/constraints/sizes.dart';
+import 'package:storyapp/utils/constraints/colors.dart';
+import 'package:storyapp/utils/constraints/sizes.dart';
 
 ///widget for displaying an animated loading indicator
 

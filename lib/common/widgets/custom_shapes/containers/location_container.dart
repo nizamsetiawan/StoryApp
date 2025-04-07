@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:agroai/utils/constraints/colors.dart';
-import 'package:agroai/utils/constraints/sizes.dart';
-import 'package:agroai/utils/device/device_utility.dart';
-import 'package:agroai/utils/helpers/helper_functions.dart';
+import 'package:storyapp/utils/constraints/colors.dart';
+import 'package:storyapp/utils/constraints/sizes.dart';
+import 'package:storyapp/utils/device/device_utility.dart';
+import 'package:storyapp/utils/helpers/helper_functions.dart';
 
 class TLocationContainer extends StatelessWidget {
   const TLocationContainer({

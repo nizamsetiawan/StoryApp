@@ -1,9 +1,9 @@
-import 'package:agroai/utils/logging/logger.dart';
+import 'package:storyapp/utils/logging/logger.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:agroai/utils/constraints/colors.dart';
-import 'package:agroai/utils/helpers/helper_functions.dart';
+import 'package:storyapp/utils/constraints/colors.dart';
+import 'package:storyapp/utils/helpers/helper_functions.dart';
 
 class TLoaders {
   static hideSnackBar() => ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();

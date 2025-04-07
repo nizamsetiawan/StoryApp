@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:agroai/utils/theme/custom_themes/appbar_theme.dart';
-import 'package:agroai/utils/theme/custom_themes/bottom_sheet_theme.dart';
-import 'package:agroai/utils/theme/custom_themes/checkbox_theme.dart';
-import 'package:agroai/utils/theme/custom_themes/elevated_button_theme.dart';
-import 'package:agroai/utils/theme/custom_themes/outlined_button_theme.dart';
-import 'package:agroai/utils/theme/custom_themes/text_field_theme.dart';
-import 'package:agroai/utils/theme/custom_themes/text_theme.dart';
+import 'package:storyapp/utils/theme/custom_themes/appbar_theme.dart';
+import 'package:storyapp/utils/theme/custom_themes/bottom_sheet_theme.dart';
+import 'package:storyapp/utils/theme/custom_themes/checkbox_theme.dart';
+import 'package:storyapp/utils/theme/custom_themes/elevated_button_theme.dart';
+import 'package:storyapp/utils/theme/custom_themes/outlined_button_theme.dart';
+import 'package:storyapp/utils/theme/custom_themes/text_field_theme.dart';
+import 'package:storyapp/utils/theme/custom_themes/text_theme.dart';
 
 import '../constraints/colors.dart';
 

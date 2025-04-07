@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:agroai/common/widgets/custom_shapes/containers/circular_container.dart';
-import 'package:agroai/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
-import 'package:agroai/utils/constraints/colors.dart';
+import 'package:storyapp/common/widgets/custom_shapes/containers/circular_container.dart';
+import 'package:storyapp/common/widgets/custom_shapes/curved_edges/curved_edges_widget.dart';
+import 'package:storyapp/utils/constraints/colors.dart';
 
 class TPrimaryHeaderContainer extends StatelessWidget {
   const TPrimaryHeaderContainer({

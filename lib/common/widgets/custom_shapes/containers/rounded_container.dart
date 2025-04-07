@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:agroai/utils/constraints/colors.dart';
-import 'package:agroai/utils/constraints/sizes.dart';
+import 'package:storyapp/utils/constraints/colors.dart';
+import 'package:storyapp/utils/constraints/sizes.dart';
 
 class TRoundedContainer extends StatelessWidget {
   const TRoundedContainer(

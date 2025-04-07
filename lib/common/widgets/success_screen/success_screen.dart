@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:agroai/common/styles/spacing_styles.dart';
-import 'package:agroai/utils/constraints/sizes.dart';
-import 'package:agroai/utils/constraints/text_strings.dart';
-import 'package:agroai/utils/helpers/helper_functions.dart';
+import 'package:storyapp/common/styles/spacing_styles.dart';
+import 'package:storyapp/utils/constraints/sizes.dart';
+import 'package:storyapp/utils/constraints/text_strings.dart';
 import 'package:lottie/lottie.dart';
 
 class SuccessScreen extends StatelessWidget {
@@ -43,7 +42,7 @@ class SuccessScreen extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                     onPressed: onPressed,
-                    child: const Text(TTexts.tContinue)),
+                    child: const Text("Lanjutkan")),
               ),
             ],
           ),

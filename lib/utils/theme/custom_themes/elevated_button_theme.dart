@@ -1,4 +1,4 @@
-import 'package:agroai/utils/constraints/colors.dart';
+import 'package:storyapp/utils/constraints/colors.dart';
 import 'package:flutter/material.dart';
 
 /// -- light and dark elevated button themes

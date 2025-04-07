@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:agroai/utils/logging/logger.dart';
+import 'package:storyapp/utils/logging/logger.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:agroai/utils/helpers/loaders.dart';
+import 'package:storyapp/utils/helpers/loaders.dart';
 
 
 class NetworkManager extends GetxController {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:agroai/utils/constraints/colors.dart';
+
+import '../../utils/constraints/colors.dart';
 
 class TShadowStyle {
 
