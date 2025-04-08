@@ -27,10 +27,6 @@ class OnboardingController extends GetxController {
   // Update Current Index & jump to next page
   void nextPage() {
     if (currentPageIndex.value == 2) {
-      // Get.offAllNamed('/login');
-      // Jika Anda menggunakan shared preferences untuk first time
-      // final storage = GetStorage();
-      // storage.write('isFirstTime', false);
       Get.offAllNamed('/login');
     } else {
       int page = currentPageIndex.value + 1;

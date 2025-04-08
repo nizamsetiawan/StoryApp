@@ -49,7 +49,7 @@ class THelperFunctions {
           content: Text(message),
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
+              onPressed: () => Get.back(),
               child: const Text('OK'),
             ),
           ],
@@ -58,11 +58,8 @@ class THelperFunctions {
     );
   }
 
-  static void navigateToScreen(BuildContext context, Widget screen) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (_) => screen),
-    );
+  static void navigateToScreen(Widget screen) {
+    Get.to(() => screen);
   }
 
   static String truncateText(String text, int maxLength) {

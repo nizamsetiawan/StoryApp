@@ -34,7 +34,7 @@ class TFullScreenLoader {
 
   ///stop the currently loading open dialog
   static stopLoading() {
-    Navigator.of(Get.overlayContext!).pop(); //
+    Get.back(); // GetX handles overlay context automatically
     TLoggerHelper.info('Loading dialog closed');// clos// e dialog using navigator
   }
 }

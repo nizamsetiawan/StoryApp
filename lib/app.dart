@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storyapp/routes/app_routes.dart';
-import 'package:storyapp/utils/constraints/colors.dart';
 import 'package:storyapp/utils/theme/theme.dart';
-
 import 'bindings/general_bindings.dart';
 import 'data/authentication/authentication_repository.dart';
 import 'features/onboarding/screens/onboarding_screen.dart';

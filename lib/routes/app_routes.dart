@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import '../features/authentication/screens/login/login_screen.dart';
 import '../features/authentication/screens/signup/signup_screen.dart';
@@ -15,6 +14,5 @@ class AppRoutes {
     GetPage(name: '/story-detail', page: () => StoryDetailScreen(storyId: Get.parameters['id']!)),
     GetPage(name: '/add-story', page: () => const AddStoryScreen()),
 
-    // Add other routes as needed
   ];
 }

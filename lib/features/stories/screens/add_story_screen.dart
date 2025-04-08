@@ -189,14 +189,14 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Get.back();
               _pickImage(ImageSource.camera);
             },
             child: const Text('Camera'),
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context);
+              Get.back();
               _pickImage(ImageSource.gallery);
             },
             child: const Text('Gallery'),
