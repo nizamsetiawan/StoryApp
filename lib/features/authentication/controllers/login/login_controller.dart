@@ -37,7 +37,7 @@ class LoginController extends GetxController {
       TFullScreenLoader.stopLoading();
 
       // Redirect
-      Get.offAllNamed('/home');
+      Get.rootDelegate.offNamed('/home');
     } catch (e) {
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Login Failed', message: e.toString());

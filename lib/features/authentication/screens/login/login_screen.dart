@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storyapp/features/authentication/controllers/login/login_controller.dart';
 
-import '../../../../common/widgets/login_signup/form_divider.dart';
+import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../utils/validators/validation.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -12,7 +12,9 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(LoginController());
     return Scaffold(
-      appBar: AppBar(),
+      appBar: const TAppBar(
+        title: Text(''),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -78,7 +80,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   const Text("Don't have an account?"),
                   TextButton(
-                    onPressed: () => Get.toNamed('/signup'),
+                    onPressed: () => Get.rootDelegate.toNamed('/signup'),
                     child: const Text('Sign Up'),
                   ),
                 ],

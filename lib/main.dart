@@ -18,9 +18,6 @@ void main() async {
   /// Get local storage
   await GetStorage.init();
 
-
-
-
   /// Initialize authentication repository
   Get.put(AuthenticationRepository());
 

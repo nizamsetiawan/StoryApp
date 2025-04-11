@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:storyapp/features/stories/screens/story_detail_screen.dart';
+import '../../../common/widgets/appbar/appbar.dart';
 import '../../../data/authentication/authentication_repository.dart';
 import '../controllers/story_controller.dart';
 import '../models/story_model.dart';
@@ -12,12 +13,12 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(StoryController());
     return Scaffold(
-      appBar: AppBar(
+      appBar: TAppBar(
         title: const Text('Dicoding Stories'),
         actions: [
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () => Get.toNamed('/add-story'),
+            onPressed: () => Get.rootDelegate.toNamed('/add-story'),
           ),
           IconButton(
             icon: const Icon(Icons.logout),

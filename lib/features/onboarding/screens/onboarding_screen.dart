@@ -27,7 +27,7 @@ class OnboardingController extends GetxController {
   // Update Current Index & jump to next page
   void nextPage() {
     if (currentPageIndex.value == 2) {
-      Get.offAllNamed('/login');
+      Get.rootDelegate.offNamed('/login');
     } else {
       int page = currentPageIndex.value + 1;
       pageController.animateToPage(

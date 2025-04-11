@@ -86,7 +86,7 @@ class AuthenticationRepository extends GetxController {
     try {
       _user.value = UserModel.empty();
       await _storage.remove('AUTH_TOKEN');
-      Get.offAllNamed('/login');
+      Get.rootDelegate.offNamed('/login');
 
     } catch (e) {
       TLoggerHelper.error('Logout error', e);

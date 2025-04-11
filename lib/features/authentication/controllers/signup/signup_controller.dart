@@ -54,7 +54,7 @@ class SignupController extends GetxController {
       );
 
       // Redirect to Login
-      Get.offAllNamed('/login');
+      Get.rootDelegate.toNamed('/login');
     } catch (e) {
       TFullScreenLoader.stopLoading();
       TLoaders.errorSnackBar(title: 'Signup Failed', message: e.toString());
