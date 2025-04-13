@@ -65,7 +65,12 @@ class AuthenticationRepository extends GetxController {
       }
 
       final loginResult = response['loginResult'];
-      final user = UserModel.fromJson(loginResult);
+      final user = UserModel.fromJson({
+        'id': loginResult['userId'] ?? '',
+        'name': loginResult['name'] ?? '',
+        'email': email, // Or get from response if available
+        'token': loginResult['token'] ?? '',
+      });
 
       // Save user data
       _user.value = user;

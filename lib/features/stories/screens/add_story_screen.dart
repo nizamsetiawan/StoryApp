@@ -1,7 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:location/location.dart' as loc;
+import 'package:geocoding/geocoding.dart';
+import '../../../utils/constraints/colors.dart';
 import '../../../utils/helpers/loaders.dart';
 import '../controllers/story_controller.dart';
 
@@ -15,8 +19,12 @@ class AddStoryScreen extends StatefulWidget {
 class _AddStoryScreenState extends State<AddStoryScreen> {
   final _formKey = GlobalKey<FormState>();
   final _descriptionController = TextEditingController();
+  final _addressController = TextEditingController();
+  final _location = loc.Location();
+  final _picker = ImagePicker();
   File? _imageFile;
-  final ImagePicker _picker = ImagePicker();
+  LatLng? _selectedLocation;
+  bool _isLoadingLocation = false;
 
   Future<void> _pickImage(ImageSource source) async {
     try {
@@ -33,17 +41,54 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
 
         if (fileSize > 1 * 1024 * 1024) {
           TLoaders.errorSnackBar(title: 'Error', message: 'Image size should be less than 1MB');
-
           return;
         }
 
-        setState(() {
-          _imageFile = file;
-        });
+        setState(() => _imageFile = file);
       }
     } catch (e) {
       TLoaders.errorSnackBar(title: 'Error', message: 'Failed to pick image');
+    }
+  }
 
+  Future<void> _getCurrentLocation() async {
+    setState(() => _isLoadingLocation = true);
+    try {
+      final permission = await _location.hasPermission();
+      if (permission == loc.PermissionStatus.denied) {
+        await _location.requestPermission();
+      }
+
+      if (permission != loc.PermissionStatus.granted) {
+        throw Exception('Location permission not granted');
+      }
+
+      final locationData = await _location.getLocation();
+      setState(() {
+        _selectedLocation = LatLng(locationData.latitude!, locationData.longitude!);
+      });
+      await _getAddressFromLatLng(_selectedLocation!);
+
+      TLoaders.successSnackBar(
+          title: 'Success',
+          message: 'Location obtained successfully'
+      );
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Error', message: 'Failed to get location: ${e.toString()}');
+    } finally {
+      setState(() => _isLoadingLocation = false);
+    }
+  }
+
+  Future<void> _getAddressFromLatLng(LatLng latLng) async {
+    try {
+      final places = await placemarkFromCoordinates(latLng.latitude, latLng.longitude);
+      if (places.isNotEmpty) {
+        final address = '${places[0].street}, ${places[0].locality}';
+        _addressController.text = address;
+      }
+    } catch (e) {
+      TLoaders.errorSnackBar(title: 'Error', message: 'Failed to get address: ${e.toString()}');
     }
   }
 
@@ -51,7 +96,6 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
     if (_formKey.currentState!.validate()) {
       if (_imageFile == null) {
         TLoaders.errorSnackBar(title: 'Error', message: 'Please select an image');
-
         return;
       }
 
@@ -60,11 +104,12 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
         await controller.addStory(
           description: _descriptionController.text,
           photoFile: _imageFile!,
+          lat: _selectedLocation?.latitude,
+          lon: _selectedLocation?.longitude,
         );
         Get.back();
       } catch (e) {
         TLoaders.errorSnackBar(title: 'Error', message: 'Failed to add story');
-
       }
     }
   }
@@ -83,7 +128,7 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
             children: [
               // Image Preview
               GestureDetector(
-                onTap: () => _showImageSourceDialog(),
+                onTap: _showImageSourceDialog,
                 child: Container(
                   height: 200,
                   decoration: BoxDecoration(
@@ -113,7 +158,7 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
                         bottom: 8,
                         right: 8,
                         child: FloatingActionButton.small(
-                          onPressed: () => _showImageSourceDialog(),
+                          onPressed: _showImageSourceDialog,
                           child: const Icon(Icons.edit),
                         ),
                       ),
@@ -144,7 +189,65 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
               ),
               const SizedBox(height: 16),
 
-              // Action Buttons
+              // Location Section
+              const Text('Select Location:', style: TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
+              SizedBox(
+                height: 200,
+                child: GoogleMap(
+                  initialCameraPosition: const CameraPosition(
+                    target: LatLng(-6.2088, 106.8456),
+                    zoom: 12,
+                  ),
+                  onTap: (latLng) {
+                    setState(() => _selectedLocation = latLng);
+                    _getAddressFromLatLng(latLng);
+                  },
+                  markers: _selectedLocation != null
+                      ? {
+                    Marker(
+                      markerId: const MarkerId('selected'),
+                      position: _selectedLocation!,
+                    ),
+                  }
+                      : {},
+                ),
+              ),
+              const SizedBox(height: 8),
+
+              // Location Action Buttons
+              Row(
+                children: [
+                  Expanded(
+                    child: OutlinedButton.icon(
+                      icon: const Icon(Icons.my_location),
+                      label: const Text('Use Current Location'),
+                      onPressed: _getCurrentLocation,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+
+              // Address Display
+              TextFormField(
+                controller: _addressController,
+                readOnly: true,
+                decoration: InputDecoration(
+                  labelText: 'Location Address',
+                  border: const OutlineInputBorder(),
+                  suffixIcon: _isLoadingLocation
+                      ? const SizedBox(
+                    width: 16,
+                    height: 16,
+                    child: CircularProgressIndicator(strokeWidth: 2, color: TColors.primary,),
+                  )
+                      : const Icon(Icons.location_on),
+                ),
+              ),
+              const SizedBox(height: 16),
+
+              // Image Action Buttons
               Row(
                 children: [
                   Expanded(
@@ -183,7 +286,7 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
 
   void _showImageSourceDialog() {
     showDialog(
-      context: context,
+      context: Get.context!,
       builder: (context) => AlertDialog(
         title: const Text('Select Image Source'),
         actions: [
@@ -209,6 +312,7 @@ class _AddStoryScreenState extends State<AddStoryScreen> {
   @override
   void dispose() {
     _descriptionController.dispose();
+    _addressController.dispose();
     super.dispose();
   }
 }

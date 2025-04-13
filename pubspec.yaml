@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.5.4
+  sdk: ^3.7.0
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -57,14 +57,20 @@ dependencies:
   panara_dialogs: ^0.1.5
   flutter_launcher_icons: ^0.13.1
   flutter_dotenv: ^5.2.1
-#  geolocator: ^13.0.2
-#  geocoding: ^3.0.0
-
-  google_maps_flutter: ^2.10.1
+  geocoding: ^3.0.0
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.8.1
+  google_maps_flutter: ^2.6.1
   go_router: ^14.8.1
+  flutter_polyline_points: ^2.1.0
+  location: ^7.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.4.4
+  freezed: ^2.3.2
+  json_serializable: ^6.6.1
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

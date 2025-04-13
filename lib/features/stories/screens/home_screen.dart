@@ -12,6 +12,15 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(StoryController());
+    final scrollController = ScrollController();
+
+    scrollController.addListener(() {
+      if (scrollController.position.pixels ==
+          scrollController.position.maxScrollExtent) {
+        controller.fetchStories();
+      }
+    });
+
     return Scaffold(
       appBar: TAppBar(
         title: const Text('Dicoding Stories'),
@@ -25,13 +34,14 @@ class HomeScreen extends StatelessWidget {
             onPressed: () {
               Get.defaultDialog(
                 title: 'Logout',
-                middleText: 'Are you sure you want to logout?',
-                textConfirm: 'Yes',
-                textCancel: 'No',
+                middleText: 'Apakah Anda yakin ingin logout?',
+                textConfirm: 'Ya',
+                textCancel: 'Tidak',
                 confirmTextColor: Colors.white,
                 onConfirm: () {
                   Get.find<AuthenticationRepository>().logout();
-                },              );
+                },
+              );
             },
           ),
         ],
@@ -40,22 +50,20 @@ class HomeScreen extends StatelessWidget {
             () => RefreshIndicator(
           onRefresh: () async => controller.fetchStories(refresh: true),
           child: ListView.builder(
+            controller: scrollController, // Tambahkan scroll controller
             itemCount: controller.stories.length + (controller.hasMore.value ? 1 : 0),
             itemBuilder: (context, index) {
               if (index < controller.stories.length) {
                 final story = controller.stories[index];
                 return StoryCard(story: story);
               } else {
-                if (controller.isLoading.value) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  return Center(
-                    child: TextButton(
-                      onPressed: () => controller.fetchStories(),
-                      child: const Text('Load More'),
-                    ),
-                  );
-                }
+                // Tampilkan loading indicator di bagian bawah saat loading
+                return controller.isLoading.value
+                    ? const Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16.0),
+                  child: Center(child: CircularProgressIndicator()),
+                )
+                    : const SizedBox.shrink();
               }
             },
           ),
@@ -89,12 +97,14 @@ class StoryCard extends StatelessWidget {
                   return Center(
                     child: CircularProgressIndicator(
                       value: loadingProgress.expectedTotalBytes != null
-                          ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                          ? loadingProgress.cumulativeBytesLoaded /
+                          loadingProgress.expectedTotalBytes!
                           : null,
                     ),
                   );
                 },
-                errorBuilder: (context, error, stackTrace) => const Icon(Icons.error),
+                errorBuilder: (context, error, stackTrace) =>
+                const Icon(Icons.error),
               ),
             ),
             Padding(

@@ -1,11 +1,18 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'story_model.g.dart';
+
+@JsonSerializable()
 class StoryModel {
   final String id;
   final String name;
   final String description;
   final String photoUrl;
+  @JsonKey(fromJson: _dateTimeFromJson, toJson: _dateTimeToJson)
   final DateTime createdAt;
   final double? lat;
   final double? lon;
+  final String? address;
 
   StoryModel({
     required this.id,
@@ -15,27 +22,13 @@ class StoryModel {
     required this.createdAt,
     this.lat,
     this.lon,
+    this.address,
   });
 
-  factory StoryModel.fromJson(Map<String, dynamic> json) {
-    return StoryModel(
-      id: json['id'] ?? '',
-      name: json['name'] ?? '',
-      description: json['description'] ?? '',
-      photoUrl: json['photoUrl'] ?? '',
-      createdAt: DateTime.parse(json['createdAt']),
-      lat: json['lat']?.toDouble(),
-      lon: json['lon']?.toDouble(),
-    );
-  }
+  factory StoryModel.fromJson(Map<String, dynamic> json) => _$StoryModelFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'name': name,
-    'description': description,
-    'photoUrl': photoUrl,
-    'createdAt': createdAt.toIso8601String(),
-    'lat': lat,
-    'lon': lon,
-  };
+  Map<String, dynamic> toJson() => _$StoryModelToJson(this);
+
+  static DateTime _dateTimeFromJson(String date) => DateTime.parse(date);
+  static String _dateTimeToJson(DateTime date) => date.toIso8601String();
 }

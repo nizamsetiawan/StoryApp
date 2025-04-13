@@ -50,7 +50,7 @@ class THttpHelper {
     required String description,
     required File photo,
     double? lat,
-    double? lon,
+    double? lon,String? address
   }) async {
     try {
       final authRepo = Get.find<AuthenticationRepository>();

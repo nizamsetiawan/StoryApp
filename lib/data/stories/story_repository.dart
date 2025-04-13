@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
 import 'package:storyapp/utils/logging/logger.dart';
 import 'package:storyapp/features/stories/models/story_model.dart';
@@ -56,8 +57,13 @@ class StoryRepository extends GetxController {
     double? lon,
   }) async {
     try {
-      TLoggerHelper.debug('Starting to upload story');
-      TLoggerHelper.info('Story details - description: $description, lat: $lat, lon: $lon');
+      String? address;
+      if (lat != null && lon != null) {
+        final places = await placemarkFromCoordinates(lat, lon);
+        if (places.isNotEmpty) {
+          address = '${places[0].street}, ${places[0].locality}';
+        }
+      }
 
       final response = await _api.uploadStory(
         endpoint: '/stories',
@@ -65,16 +71,13 @@ class StoryRepository extends GetxController {
         photo: photoFile,
         lat: lat,
         lon: lon,
+        address: address, // Send address to API
       );
 
       if (response['error'] == true) {
-        TLoggerHelper.warning('API returned error: ${response['message']}');
         throw TApiException(message: response['message']);
       }
-
-      TLoggerHelper.info('Story uploaded successfully');
     } catch (e) {
-      TLoggerHelper.error('Error adding story', e);
       throw TApiException(message: e.toString());
     }
   }
